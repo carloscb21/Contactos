@@ -4,5 +4,7 @@
     <string name="app_name">Contactos</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="crear_contacto">Crear Contacto</string>
+    <string name="agregar_contacto">Agregar Contacto</string>
 
 </resources>

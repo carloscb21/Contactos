@@ -37,7 +37,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Crear Contacto"
+                        android:text="@string/crear_contacto"
                         android:id="@+id/textView"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
@@ -99,7 +99,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Agregar Contacto"
+                        android:text="@string/agregar_contacto"
                         android:id="@+id/btnAgregar"
                         android:layout_below="@+id/cmpDireccion"
                         android:layout_centerHorizontal="true"
