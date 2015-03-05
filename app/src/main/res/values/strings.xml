@@ -6,5 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="crear_contacto">Crear Contacto</string>
     <string name="agregar_contacto">Agregar Contacto</string>
+    <string name="hola">Hola</string>
 
 </resources>
