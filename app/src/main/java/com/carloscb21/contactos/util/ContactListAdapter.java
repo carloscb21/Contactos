@@ -1,6 +1,7 @@
 package com.carloscb21.contactos.util;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -54,7 +55,7 @@ public class ContactListAdapter extends ArrayAdapter<Contacto> {
         textview = (TextView) view.findViewById(R.id.viewEmail);
         textview.setText(actual.getEmail());
         ImageView ivContacImage = (ImageView) view.findViewById(R.id.ivContactimage);
-        ivContacImage.setImageURI(actual.getImageUri());
+        ivContacImage.setImageURI(Uri.parse(actual.getImageUri()));
 
 
     }

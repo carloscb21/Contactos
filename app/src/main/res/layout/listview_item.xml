@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.carloscb21.contactos.util.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
         android:layout_width="92dp"
-        android:layout_height="match_parent"
-        android:id="@+id/ivContactimage" />
+        android:layout_height="92dp"
+        android:id="@+id/ivContactimage"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/contacticon"
+        android:focusable="false"
+        />
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight = "1"
+        android:layout_toRightOf="@+id/ivContactimage"
+        android:layout_toLeftOf="@+id/checkbox">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Nombre del Contacto"
-            android:id="@+id/viewNombre" />
+            android:id="@+id/viewNombre"
+            android:focusable="false"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -26,7 +35,8 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Telefono"
             android:id="@+id/viewTelefono"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:focusable="false"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -34,7 +44,8 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Email"
             android:id="@+id/viewEmail"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:focusable="false"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -42,7 +53,19 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Direccion"
             android:id="@+id/viewDireccion"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:focusable="false"/>
     </LinearLayout>
+    <!-- No se permite que el usuario de click sobre el Checkbox, la clase CheckableRelativeLayour se encargara de esta asignacion para cada contacto de manera independiente-->
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/ivContactimage"
+        android:clickable="false"
+        android:focusable="false"/>
 
-</LinearLayout>
+</com.carloscb21.contactos.util.CheckableRelativeLayout>
