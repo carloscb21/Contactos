@@ -30,7 +30,6 @@ public class CheckableRelativeLayout extends RelativeLayout implements Checkable
         inicializar(attrs);
     }
 
-
     @Override
     public void setChecked(boolean checked) {
         this.isChecked = isChecked;

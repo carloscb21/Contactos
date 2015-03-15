@@ -1,18 +1,45 @@
 package com.carloscb21.contactos.util;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.io.Serializable;
 
 /**
  * Created by Administrador on 02/03/2015.
  */
 
+@DatabaseTable(tableName = "contacto")
 //la clase contacto solo va a contener 4 atributos de tipo cadena, String.
 //1 mas para la imagen
 //Serializable = esta clase puede ser almacenable en una base de datos
 public class Contacto implements Serializable {
-    private String nombre, telefono, email, direccion;
+
+    @DatabaseField(generatedId = true)
+    private int id;//Primary Key
+
+    @DatabaseField(index = true, canBeNull = false)
+    private String nombre;
+
+    @DatabaseField
+    private String telefono;
+
+    @DatabaseField
+    private String email;
+
+    @DatabaseField
+    private String direccion;
+
+    @DatabaseField
     //los objetos Uri no son serializables
     private String imageUri;
+
+    //ejemplo con objeto Uri
+    //@DatabaseField(persistedClass = /*clase para convertir objeto Uri a String, y luego al reves, tenemos una cadena String y lo convertimos a Uri*/)
+
+    //ORMLIFE nos exige un constructor predeterminado
+    public Contacto(){
+    }
 
     public Contacto(String nombre, String telefono, String email, String direccion, String imageUri){
         this.nombre = nombre;
@@ -21,7 +48,12 @@ public class Contacto implements Serializable {
         this.direccion = direccion;
         this.imageUri = imageUri;
     }
+
     //metodos Get
+
+    public int getId() {
+        return id;
+    }
     public String getNombre() {
         return nombre;
     }

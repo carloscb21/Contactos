@@ -12,7 +12,6 @@ import com.carloscb21.contactos.ListaContactosFragment;
  */
 public class TabsPagerAdapter extends FragmentPagerAdapter{
     public TabsPagerAdapter(FragmentManager fm){
-
         super (fm);
     }
 
