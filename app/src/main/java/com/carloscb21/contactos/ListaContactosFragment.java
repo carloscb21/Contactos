@@ -1,7 +1,9 @@
 package com.carloscb21.contactos;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -84,10 +86,26 @@ public class ListaContactosFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_eliminar_contacto: eliminarContacto(item); return true;
+            case R.id.action_eliminar_contacto:
+                String mensaje = "¿Esta seguro de eliminar los contactos seleccionados?";
+                confirmarAction(item,mensaje);
+                return true;
             default: return super.onOptionsItemSelected(item);
         }
+    }
 
+    private void confirmarAction(final MenuItem item, String mensaje){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setIcon(R.drawable.ic_launcher).setTitle("Confirmar Operacion");
+        builder.setMessage(mensaje);
+        builder.setPositiveButton("SI",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                eliminarContacto(item);
+            }
+        });
+        builder.setNegativeButton("NO",null);
+        builder.show();
     }
 
     private void eliminarContacto(MenuItem item) {
@@ -97,11 +115,11 @@ public class ListaContactosFragment extends Fragment {
             //posicion del contacto en el adaptador
             int posicion = array.keyAt(i);
             if (array.valueAt(i)) seleccion.add(adapter.getItem(posicion));
-            Intent intent = new Intent("listacontactos");
-            intent.putExtra("operacion",ContactReceiver.CONTACTO_ELIMINADO);
-            intent.putExtra("adios",seleccion);
-            getActivity().sendBroadcast(intent);
-            contactsListView.clearChoices();
         }
+        Intent intent = new Intent("listacontactos");
+        intent.putExtra("operacion",ContactReceiver.CONTACTO_ELIMINADO);
+        intent.putExtra("adios",seleccion);
+        getActivity().sendBroadcast(intent);
+        contactsListView.clearChoices();
     }
 }

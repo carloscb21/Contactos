@@ -1,8 +1,11 @@
 package com.carloscb21.contactos;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -108,11 +111,22 @@ public class CrearContactosFragment extends Fragment implements View.OnClickList
         txtNombre.requestFocus();
     }
 
+    //con esto lo que conseguimos son los permisos provisionales para almacenar la informacion del usuario cada vez que apague el movil
     @Override
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode== Activity.RESULT_OK && requestCode ==requestCode){
-            imgViewContacto.setImageURI(data.getData());
-            imgViewContacto.setTag(data.getData());
+        if (resultCode== Activity.RESULT_OK && requestCode ==request_code){
+            Uri uri = data.getData();
+            final int  takeFlags;
+            if (Build.VERSION.SDK_INT==Build.VERSION_CODES.KITKAT){
+                takeFlags = data.getFlags() &
+                        (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                ContentResolver resolver = getActivity().getContentResolver();
+                //el error marcado en takeFlags no condiciona en la compilacion
+                resolver.takePersistableUriPermission(uri,takeFlags);
+            }
+            imgViewContacto.setImageURI(uri);
+            imgViewContacto.setTag(uri);
         }
     }
  }

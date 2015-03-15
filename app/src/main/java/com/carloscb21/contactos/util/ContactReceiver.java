@@ -46,12 +46,12 @@ public class ContactReceiver extends BroadcastReceiver {
     }
     private void eliminarContacto(Intent intent) {
         ArrayList<Contacto> lista = (ArrayList<Contacto>) intent.getSerializableExtra("datos");
+        for (Contacto c:lista) adapter.remove(c);
         if (activity!=null){
             DatabaseHelper helper = activity.getHelper();
             RuntimeExceptionDao<Contacto,Integer> dao = helper.getContactoRunTimeDAO();
             dao.delete(lista);
         }
-        for (Contacto c: lista){ adapter.remove(c);}
     }
     private void actualizarContacto(Intent intent) {
         Contacto contacto = (Contacto) intent.getSerializableExtra("datos");
