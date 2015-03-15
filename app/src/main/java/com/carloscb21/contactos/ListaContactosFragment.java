@@ -1,5 +1,6 @@
 package com.carloscb21.contactos;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -18,6 +19,9 @@ import android.widget.ListView;
 import com.carloscb21.contactos.util.ContactListAdapter;
 import com.carloscb21.contactos.util.ContactReceiver;
 import com.carloscb21.contactos.util.Contacto;
+import com.carloscb21.contactos.util.DatabaseHelper;
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import java.util.ArrayList;
 
@@ -41,7 +45,7 @@ public class ListaContactosFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        receiver = new ContactReceiver(adapter);
+        receiver = new ContactReceiver(adapter,getOrmLiteBaseActivity());
         getActivity().registerReceiver(receiver,new IntentFilter("listacontactos"));
     }
 
@@ -53,9 +57,23 @@ public class ListaContactosFragment extends Fragment {
     private void inicializarComponentes(View view){
         contactsListView = (ListView) view.findViewById(R.id.listView);
         adapter = new ContactListAdapter(getActivity(),new ArrayList<Contacto>());
+        OrmLiteBaseActivity<DatabaseHelper> activity = getOrmLiteBaseActivity();
+        if (activity!=null){
+            DatabaseHelper helper = activity.getHelper();
+            RuntimeExceptionDao<Contacto,Integer> dao = helper.getContactoRunTimeDAO();
+            adapter.addAll(dao.queryForAll());
+        }
+
         //se configura para que el adapter notifique los cambios en el dataset automaticamente
         adapter.setNotifyOnChange(true);
         contactsListView.setAdapter(adapter);
+    }
+
+    private OrmLiteBaseActivity<DatabaseHelper> getOrmLiteBaseActivity(){
+        Activity activity = getActivity();
+        if (activity instanceof OrmLiteBaseActivity)
+            return (OrmLiteBaseActivity<DatabaseHelper>) activity;
+        return null;
     }
 
     @Override

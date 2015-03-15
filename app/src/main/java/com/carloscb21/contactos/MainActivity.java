@@ -7,12 +7,13 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 
+import com.carloscb21.contactos.util.DatabaseHelper;
 import com.carloscb21.contactos.util.TabsPagerAdapter;
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 // ARRAY ADAPTER su funcion es integrar es nuestro ArrayList que habiamos creado para poder representar dentro del layout que habiamos creado previamente, el tab2
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener{
+public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> implements ActionBar.TabListener, ViewPager.OnPageChangeListener{
 
     //control de fichas(tabs)
     private ViewPager viewPager;
